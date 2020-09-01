@@ -3,7 +3,7 @@ import Nav from './Nav'
 
 export const Title = () => {
   return (
-    <div>
+    <div className="header">
       <header>Northcoders News</header>
       <Nav />
     </div>

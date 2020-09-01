@@ -10,8 +10,14 @@ export const getTopics = () => {
   })
 }
 
-export const getArticles = () => {
-  return axiosInst.get('/articles').then((articles) => {
+export const getArticles = (topic) => {
+  return axiosInst.get('/articles', { params: { topic } }).then((articles) => {
     return articles.data.articles
+  })
+}
+
+export const getSingleArticle = (article_id) => {
+  return axiosInst.get(`/articles/${article_id}`).then((article) => {
+    return article.data.article
   })
 }

@@ -16,13 +16,13 @@ class Nav extends Component {
   }
 
   render() {
-    console.log(this.state)
-
     const { topics } = this.state
     return (
       <nav>
+        <Link to={`/`} key="home">
+          <button>Home</button>
+        </Link>
         {topics.map((topic) => {
-          console.log(topic)
           return (
             <Link to={`/topic/${topic.slug}`} key={topic.slug}>
               <button>{topic.slug}</button>
