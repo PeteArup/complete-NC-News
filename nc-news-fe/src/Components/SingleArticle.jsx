@@ -4,16 +4,25 @@ import Loader from './Loader'
 import Voter from './Voter'
 import AddComment from './AddComment'
 import LoginToView from './LoginToView'
+import ErrorPage from './ErrorPage'
 
 class SingleArticle extends Component {
   state = { comments: {}, article: {}, isLoading: true, newComment: '' }
 
   componentDidMount() {
-    api.getSingleArticle(this.props.article_id).then((article) => {
-      api.getComments(article.article_id).then((comments) => {
-        this.setState({ comments, article, isLoading: false })
+    api
+      .getSingleArticle(this.props.article_id)
+      .then((article) => {
+        api.getComments(article.article_id).then((comments) => {
+          this.setState({ comments, article, isLoading: false })
+        })
       })
-    })
+      .catch((err) => {
+        this.setState({
+          isLoading: false,
+          err: { msg: err.response.data.msg, status: err.response.status }
+        })
+      })
   }
 
   getNewComment = (newComment) => {
@@ -27,8 +36,9 @@ class SingleArticle extends Component {
   }
 
   render() {
-    const { isLoading, comments } = this.state
+    const { isLoading, comments, err } = this.state
     if (isLoading) return <Loader />
+    if (err) return <ErrorPage {...err} />
     const {
       author,
       article_id,

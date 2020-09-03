@@ -5,6 +5,7 @@ import { Router } from '@reach/router'
 import './App.css'
 import SingleArticle from './Components/SingleArticle'
 import './layout.css'
+import ErrorPage from './Components/ErrorPage'
 
 class App extends Component {
   state = { user: 'grumpy19' }
@@ -13,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <Title />
-        <section>
+        <section className="login">
           {' '}
           <p>user: {user}</p>
           <button
@@ -29,11 +30,11 @@ class App extends Component {
             login
           </button>
         </section>
-
         <Router className="page">
           <AllArticles path="/" user={user} />
           <AllArticles path="/topic/:topic" user={user} />
           <SingleArticle path="/article/:article_id" user={user} />
+          <ErrorPage default status={404} msg={'Path not found!'} />
         </Router>
       </div>
     )

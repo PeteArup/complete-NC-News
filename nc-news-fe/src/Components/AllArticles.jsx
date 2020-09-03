@@ -34,11 +34,8 @@ class AllArticles extends Component {
   }
 
   render() {
-    console.log(this.state)
     const { articles, isLoading } = this.state
-    if (isLoading) {
-      return <Loader />
-    }
+    if (isLoading) return <Loader />
     return (
       <ArticleList
         articles={articles}

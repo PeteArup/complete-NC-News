@@ -3,7 +3,7 @@ import * as api from '../utils/api'
 
 class AddComment extends React.Component {
   state = {
-    comment: '',
+    comment: null,
     username: 'grumpy19',
     submitted: false
   }
@@ -11,11 +11,13 @@ class AddComment extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="comment">
-          Name:
+          comment:
           <input type="text" id="comment" onChange={this.handleChange} />
         </label>
         <br />
-        <button type="submit">Add comment</button>
+        {this.state.comment !== null && (
+          <button type="submit">Add comment</button>
+        )}
         {this.state.submitted && (
           <section>
             <h3>comment successfully added</h3>
@@ -33,6 +35,7 @@ class AddComment extends React.Component {
 
   handleSubmit = (submitEvent) => {
     submitEvent.preventDefault()
+
     api
       .postComment(this.props.id, {
         username: this.state.username,
