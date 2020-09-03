@@ -45,3 +45,7 @@ export const postComment = (id, newComment) => {
       return newComment.data.comment
     })
 }
+
+export const deleteComment = (id) => {
+  return axiosInst.delete(`/comments/${id}`)
+}

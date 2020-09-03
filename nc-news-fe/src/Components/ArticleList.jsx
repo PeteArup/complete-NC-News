@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import StyledListItem from './StyledListItem'
 import { Link } from '@reach/router'
 import Voter from './Voter'
+import LoginToView from './LoginToView'
 
 class ArticleList extends Component {
   state = { sort_by: '' }
@@ -34,11 +35,14 @@ class ArticleList extends Component {
                 </Link>
                 <p>Date Created: {article.created_at.substring(0, 10)}</p>
                 <p>Number of Comments: {article.comment_count}</p>
-                <Voter
-                  id={article.article_id}
-                  type="articles"
-                  votes={article.votes}
-                />
+                <LoginToView name="vote" user={this.props.user}>
+                  {' '}
+                  <Voter
+                    id={article.article_id}
+                    type="articles"
+                    votes={article.votes}
+                  />
+                </LoginToView>
               </StyledListItem>
             )
           })}

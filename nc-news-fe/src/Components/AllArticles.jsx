@@ -39,7 +39,13 @@ class AllArticles extends Component {
     if (isLoading) {
       return <Loader />
     }
-    return <ArticleList articles={articles} getSortBy={this.getSortBy} />
+    return (
+      <ArticleList
+        articles={articles}
+        getSortBy={this.getSortBy}
+        user={this.props.user}
+      />
+    )
   }
 }
 

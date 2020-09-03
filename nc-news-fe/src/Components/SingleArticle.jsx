@@ -3,6 +3,7 @@ import * as api from '../utils/api'
 import Loader from './Loader'
 import Voter from './Voter'
 import AddComment from './AddComment'
+import LoginToView from './LoginToView'
 
 class SingleArticle extends Component {
   state = { comments: {}, article: {}, isLoading: true, newComment: '' }
@@ -10,7 +11,6 @@ class SingleArticle extends Component {
   componentDidMount() {
     api.getSingleArticle(this.props.article_id).then((article) => {
       api.getComments(article.article_id).then((comments) => {
-        console.log(comments)
         this.setState({ comments, article, isLoading: false })
       })
     })
@@ -44,10 +44,14 @@ class SingleArticle extends Component {
         <h3>{title}</h3>
         <p>Author: {author}</p>
         <p>Topic: {topic} </p>
-        <Voter id={article_id} votes={votes} type="articles" />
+        <LoginToView name="vote" user={this.props.user}>
+          <Voter id={article_id} votes={votes} type="articles" />
+        </LoginToView>
         <p>{body}</p>
         <p>Comments: {comment_count}</p>
-        <AddComment id={article_id} getNewComment={this.getNewComment} />
+        <LoginToView name="add new comment" user={this.props.user}>
+          <AddComment id={article_id} getNewComment={this.getNewComment} />
+        </LoginToView>
 
         <ul>
           {comments.map((comment) => {
@@ -55,17 +59,30 @@ class SingleArticle extends Component {
               <li key={comment.comment_id}>
                 <h5>Author: {comment.author}</h5>
                 <p>{comment.body}</p>
-                <Voter
-                  id={comment.comment_id}
-                  type="comments"
-                  votes={comment.votes}
-                />
+                <LoginToView name="vote" user={this.props.user}>
+                  <Voter
+                    id={comment.comment_id}
+                    type="comments"
+                    votes={comment.votes}
+                  />
+                </LoginToView>
+                <LoginToView name="delete" user={this.props.user}>
+                  <button
+                    onClick={() => {
+                      this.deleteComment(comment.comment_id)
+                    }}>
+                    Delete comment
+                  </button>
+                </LoginToView>
               </li>
             )
           })}
         </ul>
       </div>
     )
+  }
+  deleteComment = (id) => {
+    api.deleteComment(id)
   }
 }
 
