@@ -9,7 +9,7 @@ class AddComment extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} id="commentForm">
         <p>Add comment:</p>
         <label htmlFor="comment">
           <textarea
@@ -26,7 +26,10 @@ class AddComment extends React.Component {
         )}
         {this.state.submitted && (
           <section>
-            <h3>comment successfully added</h3>
+            <h3>
+              "{this.state.newComment.body}" has successfully been added to the
+              comments
+            </h3>
           </section>
         )}
       </form>
@@ -41,7 +44,6 @@ class AddComment extends React.Component {
 
   handleSubmit = (submitEvent) => {
     submitEvent.preventDefault()
-
     api
       .postComment(this.props.id, {
         username: this.state.username,
@@ -53,6 +55,7 @@ class AddComment extends React.Component {
           return { submitted: true, newComment: newComment }
         })
       })
+    document.getElementById('commentForm').reset()
   }
 }
 

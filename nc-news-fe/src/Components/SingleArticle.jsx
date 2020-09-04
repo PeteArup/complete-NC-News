@@ -116,6 +116,12 @@ class SingleArticle extends Component {
 
   deleteComment = (id) => {
     api.deleteComment(id)
+    const filteredArr = this.state.comments.filter((comment) => {
+      return comment.comment_id !== id
+    })
+    this.setState(() => {
+      return { comments: filteredArr }
+    })
   }
 }
 
