@@ -10,9 +10,15 @@ class AddComment extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <p>Add comment:</p>
         <label htmlFor="comment">
-          comment:
-          <input type="text" id="comment" onChange={this.handleChange} />
+          <textarea
+            type="text"
+            id="comment"
+            rows="4"
+            placeholder="type new comment here"
+            onChange={this.handleChange}
+          />
         </label>
         <br />
         {this.state.comment !== null && (

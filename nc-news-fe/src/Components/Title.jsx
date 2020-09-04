@@ -4,7 +4,7 @@ import Nav from './Nav'
 export const Title = () => {
   return (
     <div className="header">
-      <header>Northcoders News</header>
+      <h1>Northcoders News</h1>
       <Nav />
     </div>
   )

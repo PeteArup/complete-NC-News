@@ -8,11 +8,10 @@ class ArticleList extends Component {
   state = { sort_by: '' }
 
   render() {
-    console.log(this.state)
     const { articles } = this.props
 
     return (
-      <div>
+      <div className="ArticleCard">
         <h3>{articles.length} articles found</h3>
         <section>
           Sort by:

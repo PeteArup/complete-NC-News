@@ -10,5 +10,23 @@ ul {
 nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+
+button.customBtnUp {
+  border: none;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/fe/Green-Up-Arrow.svg');
+  background-size: 100%;
+  padding: 14px 15px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+button.customBtnDown {
+  border: none;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/62/RedDownArrow.svg');
+  background-size: 100%;
+  padding: 14px 15px;
+  cursor: pointer;
+  display: inline-block;
 }

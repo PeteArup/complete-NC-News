@@ -15,19 +15,16 @@ class voter extends Component {
     const { votes } = this.props
     const { optimisiticVote } = this.state
     return (
-      <section>
+      <section className="voting">
         <p>Votes: {votes + optimisiticVote}</p>
         <button
+          className="customBtnUp"
           onClick={() => this.updateVote(1)}
-          disabled={optimisiticVote === 1}>
-          UP
-        </button>
-
+          disabled={optimisiticVote === 1}></button>
         <button
+          className="customBtnDown"
           onClick={() => this.updateVote(-1)}
-          disabled={optimisiticVote === -1}>
-          DOWN
-        </button>
+          disabled={optimisiticVote === -1}></button>
       </section>
     )
   }
